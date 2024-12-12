@@ -19,7 +19,8 @@
   # home.file.".xxx".text = ''
   #     xxx
   # '';
-
+  nixpkgs.config = { allowUnfree = true; };
+  nixpkgs.overlays = [ inputs.neovim-nightly-overlay.overlays.default ];
   # set cursor size and dpi for 4k monitor
   xresources.properties = {
     "Xcursor.size" = 16;
@@ -63,7 +64,7 @@
   # basic configuration of git, please change to your own
   programs.git = {
     enable = true;
-    userName = "Trong Sang Nguye";
+    userName = "Trong Sang Nguyen";
     userEmail = "33416398+ErogeMaster225@users.noreply.github.com";
   };
 
