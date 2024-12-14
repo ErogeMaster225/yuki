@@ -15,26 +15,29 @@
     code-insiders.url = "github:iosmanthus/code-insiders-flake";
   };
 
-  outputs = { self, nixpkgs, home-manager, ... }@inputs:
-    let
-      system = "x86_64-linux";
-      inherit (self) outputs;
-    in {
-      formatter.x86_64-linux = nixpkgs.legacyPackages.x86_64-linux.nixfmt;
-      nixosConfigurations = {
-        # FIXME replace with your hostname
-        nixos = nixpkgs.lib.nixosSystem rec {
-          specialArgs = { inherit inputs outputs; };
+  outputs = {
+    self,
+    nixpkgs,
+    home-manager,
+    ...
+  } @ inputs: let
+    system = "x86_64-linux";
+    inherit (self) outputs;
+  in {
+    formatter.x86_64-linux = nixpkgs.legacyPackages.x86_64-linux.alejandra;
+    nixosConfigurations = {
+      # FIXME replace with your hostname
+      nixos = nixpkgs.lib.nixosSystem rec {
+        specialArgs = {inherit inputs outputs;};
 
-          # > Our main nixos configuration file <
-          modules = [ ./nixos/configuration.nix ];
-        };
+        # > Our main nixos configuration file <
+        modules = [./nixos/configuration.nix];
       };
-      homeConfigurations."sakurafrost225" =
-        home-manager.lib.homeManagerConfiguration {
-          pkgs = nixpkgs.legacyPackages.x86_64-linux;
-          modules = [ ./home.nix ];
-          extraSpecialArgs = { inherit inputs outputs; };
-        };
     };
+    homeConfigurations."sakurafrost225" = home-manager.lib.homeManagerConfiguration {
+      pkgs = nixpkgs.legacyPackages.x86_64-linux;
+      modules = [./home.nix];
+      extraSpecialArgs = {inherit inputs outputs;};
+    };
+  };
 }

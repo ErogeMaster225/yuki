@@ -1,6 +1,9 @@
-{ inputs, config, pkgs, ... }:
-
 {
+  inputs,
+  config,
+  pkgs,
+  ...
+}: {
   # TODO please change the username & home directory to your own
   home.username = "sakurafrost225";
   home.homeDirectory = "/home/sakurafrost225";
@@ -19,21 +22,21 @@
   # home.file.".xxx".text = ''
   #     xxx
   # '';
-  nixpkgs.config = { allowUnfree = true; };
-  nixpkgs.overlays = [ inputs.neovim-nightly-overlay.overlays.default ];
+  nixpkgs.config = {allowUnfree = true;};
+  nixpkgs.overlays = [inputs.neovim-nightly-overlay.overlays.default];
   # set cursor size and dpi for 4k monitor
   xresources.properties = {
     "Xcursor.size" = 16;
     "Xft.dpi" = 172;
   };
-  programs.neovim = { defaultEditor = true; };
+  programs.neovim = {defaultEditor = true;};
   programs.vscode = {
     enable = true;
     package = inputs.code-insiders.packages.${pkgs.system}.vscode-insider;
   };
   i18n.inputMethod = {
     enabled = "fcitx5";
-    fcitx5.addons = with pkgs; [ fcitx5-unikey fcitx5-mozc fcitx5-gtk ];
+    fcitx5.addons = with pkgs; [fcitx5-unikey fcitx5-mozc fcitx5-gtk];
   };
   # Packages that should be installed to the user profile.
   home.packages = with pkgs;
@@ -68,14 +71,15 @@
       nix-output-monitor
 
       btop # replacement of htop/nmon
-    ] ++ [ inputs.zen-browser.packages."${system}".default ];
+    ]
+    ++ [inputs.zen-browser.packages."${system}".default];
 
   # basic configuration of git, please change to your own
   programs.git = {
     enable = true;
     userName = "Trong Sang Nguyen";
     userEmail = "33416398+ErogeMaster225@users.noreply.github.com";
-    extraConfig = { core = { editor = "nvim"; }; };
+    extraConfig = {core = {editor = "nvim";};};
   };
 
   # starship - an customizable prompt for any shell
@@ -91,7 +95,8 @@
   };
   xdg.configFile = {
     nvim = {
-      source = config.lib.file.mkOutOfStoreSymlink
+      source =
+        config.lib.file.mkOutOfStoreSymlink
         "${config.home.homeDirectory}/dotfiles/.config/nvim";
       recursive = true;
     };
