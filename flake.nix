@@ -8,7 +8,10 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
-    zen-browser.url = "github:ch4og/zen-browser-flake";
+    zen-browser = {
+      url = "github:youwen5/zen-browser-flake";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     code-insiders.url = "github:iosmanthus/code-insiders-flake";
   };
 
