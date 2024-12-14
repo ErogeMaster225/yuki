@@ -5,11 +5,11 @@
         "nixpkgs": "nixpkgs"
       },
       "locked": {
-        "lastModified": 1733962541,
-        "narHash": "sha256-DkuJL3FxAQHVW/U7jvEMGkK8r66h37Q/jjJLRCvDUYg=",
+        "lastModified": 1734135315,
+        "narHash": "sha256-srZM6QqWzFTQf4D+A9nAXzkF7U8bg0tjR7AmtBZAoeA=",
         "owner": "iosmanthus",
         "repo": "code-insiders-flake",
-        "rev": "2427a703a328e3109385e963fb1000ece5c89d8e",
+        "rev": "7ed28fcc99bba44da0cc67774e606de281d78716",
         "type": "github"
       },
       "original": {
@@ -170,11 +170,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1733951607,
-        "narHash": "sha256-CN6q6iCzxI1gkNyk4xLdwaMKi10r7n+aJkRzWj8PXwQ=",
+        "lastModified": 1734093295,
+        "narHash": "sha256-hSwgGpcZtdDsk1dnzA0xj5cNaHgN9A99hRF/mxMtwS4=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "6e5b2d9e8014b5572e3367937a329e7053458d34",
+        "rev": "66c5d8b62818ec4c1edb3e941f55ef78df8141a8",
         "type": "github"
       },
       "original": {
@@ -194,11 +194,11 @@
         "treefmt-nix": "treefmt-nix"
       },
       "locked": {
-        "lastModified": 1733962285,
-        "narHash": "sha256-djpjqhPZkqfe1USsuu+eT4ZyGO+dVvAf3l4FUCZEb6Y=",
+        "lastModified": 1734048484,
+        "narHash": "sha256-EtSEYNx19xzuEBJsT7yXG+nVx11CM3rvrAQAXcvG/5Q=",
         "owner": "nix-community",
         "repo": "neovim-nightly-overlay",
-        "rev": "2025aef04baf723bfa4cb8225fc11a319a5681f1",
+        "rev": "044f9a36ad620a119ebe154c26ec571a09f75039",
         "type": "github"
       },
       "original": {
@@ -210,11 +210,11 @@
     "neovim-src": {
       "flake": false,
       "locked": {
-        "lastModified": 1733924897,
-        "narHash": "sha256-Fxzl754uzyNebXW54LUliFliMbw30XG+bdb0AVtPSM0=",
+        "lastModified": 1734000357,
+        "narHash": "sha256-8FO5Ca9bLEiD649b5gkQCdjpTmbPenJHpN0JBhtLpjE=",
         "owner": "neovim",
         "repo": "neovim",
-        "rev": "442d338cb50e4cf08c58cb82b6d33b6d5df9fb1b",
+        "rev": "17383870dd3b7f04eddd48ed929cc25c7e102277",
         "type": "github"
       },
       "original": {
@@ -256,27 +256,11 @@
     },
     "nixpkgs_3": {
       "locked": {
-        "lastModified": 1733759999,
-        "narHash": "sha256-463SNPWmz46iLzJKRzO3Q2b0Aurff3U1n0nYItxq7jU=",
+        "lastModified": 1733940404,
+        "narHash": "sha256-Pj39hSoUA86ZePPF/UXiYHHM7hMIkios8TYG29kQT4g=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "a73246e2eef4c6ed172979932bc80e1404ba2d56",
-        "type": "github"
-      },
-      "original": {
-        "owner": "nixos",
-        "ref": "nixos-unstable",
-        "repo": "nixpkgs",
-        "type": "github"
-      }
-    },
-    "nixpkgs_4": {
-      "locked": {
-        "lastModified": 1732521221,
-        "narHash": "sha256-2ThgXBUXAE1oFsVATK1ZX9IjPcS4nKFOAjhPNKuiMn0=",
-        "owner": "nixos",
-        "repo": "nixpkgs",
-        "rev": "4633a7c72337ea8fd23a4f2ba3972865e3ec685d",
+        "rev": "5d67ea6b4b63378b9c13be21e2ec9d1afc921713",
         "type": "github"
       },
       "original": {
@@ -318,20 +302,64 @@
     },
     "zen-browser": {
       "inputs": {
-        "nixpkgs": "nixpkgs_4"
+        "nixpkgs": [
+          "nixpkgs"
+        ],
+        "zen-browser-aarch64": "zen-browser-aarch64",
+        "zen-browser-generic": "zen-browser-generic",
+        "zen-browser-specific": "zen-browser-specific"
       },
       "locked": {
-        "lastModified": 1732835488,
-        "narHash": "sha256-r1nomBVEMO4I0y3pMfqLletQxKak5xfpk9DhlO1AsuI=",
-        "owner": "ch4og",
+        "lastModified": 1734149261,
+        "narHash": "sha256-7od8QA2G5scD98vcy2lU9yiOzy5ZFcHYVrfzfLP+nro=",
+        "owner": "youwen5",
         "repo": "zen-browser-flake",
-        "rev": "d8fbf602685f5cf2a6475eaf20595a6dc6628891",
+        "rev": "dabf5481b2356d617bd26b7d30099c03176bbb44",
         "type": "github"
       },
       "original": {
-        "owner": "ch4og",
+        "owner": "youwen5",
         "repo": "zen-browser-flake",
         "type": "github"
+      }
+    },
+    "zen-browser-aarch64": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1733949966,
+        "narHash": "sha256-fOtYyzis+ojwkTZKCWy05ROdgfM1Dqhx25+DirN18gs=",
+        "type": "tarball",
+        "url": "https://github.com/zen-browser/desktop/releases/download/1.0.2-b.1/zen.linux-aarch64.tar.bz2"
+      },
+      "original": {
+        "type": "tarball",
+        "url": "https://github.com/zen-browser/desktop/releases/download/1.0.2-b.1/zen.linux-aarch64.tar.bz2"
+      }
+    },
+    "zen-browser-generic": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1733954563,
+        "narHash": "sha256-+ZP4UT+y99bxt7N6Pkmlj0F7FOouR0tzExemkLJiXK4=",
+        "type": "tarball",
+        "url": "https://github.com/zen-browser/desktop/releases/download/1.0.2-b.1/zen.linux-generic.tar.bz2"
+      },
+      "original": {
+        "type": "tarball",
+        "url": "https://github.com/zen-browser/desktop/releases/download/1.0.2-b.1/zen.linux-generic.tar.bz2"
+      }
+    },
+    "zen-browser-specific": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1733955296,
+        "narHash": "sha256-gUKEfpTIfLdoXg3RyNpQybt/7K820a0ljFSZ+e+iyq4=",
+        "type": "tarball",
+        "url": "https://github.com/zen-browser/desktop/releases/download/1.0.2-b.1/zen.linux-specific.tar.bz2"
+      },
+      "original": {
+        "type": "tarball",
+        "url": "https://github.com/zen-browser/desktop/releases/download/1.0.2-b.1/zen.linux-specific.tar.bz2"
       }
     }
   },

@@ -38,6 +38,9 @@
   # Packages that should be installed to the user profile.
   home.packages = with pkgs;
     [
+      nerd-fonts.fira-code
+      nerd-fonts.jetbrains-mono
+      gcc
       # here is some command line tools I use frequently
       # feel free to add your own or remove some of them
 
@@ -50,7 +53,9 @@
       p7zip
 
       neovim
-
+      vesktop
+      localsend
+      slack
       # utils
       ripgrep # recursively searches directories for a regex pattern
       eza # A modern replacement for ‘ls’
@@ -63,13 +68,14 @@
       nix-output-monitor
 
       btop # replacement of htop/nmon
-    ] ++ [ inputs.zen-browser.packages."${system}".specific ];
+    ] ++ [ inputs.zen-browser.packages."${system}".default ];
 
   # basic configuration of git, please change to your own
   programs.git = {
     enable = true;
     userName = "Trong Sang Nguyen";
     userEmail = "33416398+ErogeMaster225@users.noreply.github.com";
+    extraConfig = { core = { editor = "nvim"; }; };
   };
 
   # starship - an customizable prompt for any shell
@@ -83,7 +89,13 @@
       line_break.disabled = true;
     };
   };
-
+  xdg.configFile = {
+    nvim = {
+      source = config.lib.file.mkOutOfStoreSymlink
+        "${config.home.homeDirectory}/dotfiles/.config/nvim";
+      recursive = true;
+    };
+  };
   # alacritty - a cross-platform, GPU-accelerated terminal emulator
   programs.alacritty = {
     enable = true;
