@@ -31,6 +31,10 @@
     enable = true;
     package = inputs.code-insiders.packages.${pkgs.system}.vscode-insider;
   };
+  i18n.inputMethod = {
+    enabled = "fcitx5";
+    fcitx5.addons = with pkgs; [ fcitx5-unikey fcitx5-mozc fcitx5-gtk ];
+  };
   # Packages that should be installed to the user profile.
   home.packages = with pkgs;
     [
