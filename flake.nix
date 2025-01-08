@@ -13,6 +13,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     code-insiders.url = "github:iosmanthus/code-insiders-flake";
+    nix-gaming.url = "github:fufexan/nix-gaming";
   };
 
   outputs = {
@@ -24,10 +25,10 @@
     system = "x86_64-linux";
     inherit (self) outputs;
   in {
-    formatter.x86_64-linux = nixpkgs.legacyPackages.x86_64-linux.alejandra;
+    formatter.${system} = nixpkgs.legacyPackages.${system}.alejandra;
     nixosConfigurations = {
       # FIXME replace with your hostname
-      nixos = nixpkgs.lib.nixosSystem rec {
+      nixos = nixpkgs.lib.nixosSystem {
         specialArgs = {inherit inputs outputs;};
 
         # > Our main nixos configuration file <
@@ -35,7 +36,7 @@
       };
     };
     homeConfigurations."sakurafrost225" = home-manager.lib.homeManagerConfiguration {
-      pkgs = nixpkgs.legacyPackages.x86_64-linux;
+      pkgs = nixpkgs.legacyPackages.${system};
       modules = [./home.nix];
       extraSpecialArgs = {inherit inputs outputs;};
     };

@@ -4,9 +4,11 @@
 {
   config,
   pkgs,
+  inputs,
   ...
 }: {
   imports = [
+    inputs.nix-gaming.nixosModules.pipewireLowLatency
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
   ];
@@ -29,10 +31,12 @@
 
       # nix community's cache server
       "https://nix-community.cachix.org"
+      "https://nix-gaming.cachix.org"
     ];
     trusted-public-keys = [
       # nix community's cache server public key
       "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
+      "nix-gaming.cachix.org-1:nbjlureqMbRAxR1gJ/f3hxemL9svXaZF/Ees8vCUUs4="
     ];
   };
   # Enable networking
@@ -79,6 +83,7 @@
     alsa.enable = true;
     alsa.support32Bit = true;
     pulse.enable = true;
+    lowLatency.enable = true;
     # If you want to use JACK applications, uncomment this
     #jack.enable = true;
 
