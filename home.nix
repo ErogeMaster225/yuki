@@ -113,6 +113,10 @@ in {
       [[ ! -f ~/.config/zsh/.p10k.zsh ]] || source ~/.config/zsh/.p10k.zsh
     '';
   };
+
+  programs.hyprlock = {
+    enable = true;
+  };
   wayland.windowManager.hyprland = {
     enable = true;
     package = inputs.hyprland.packages.${pkgs.system}.hyprland;

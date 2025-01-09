@@ -79,8 +79,21 @@
   services.printing.enable = true;
 
   # Enable sound with pipewire.
-  hardware.pulseaudio.enable = false;
-  security.rtkit.enable = true;
+  services.pulseaudio.enable = false;
+
+  security = {
+    pam.services.hyprlock.text = "auth include login";
+    rtkit.enable = true;
+  };
+
+  hardware.graphics = {
+    enable = true;
+    extraPackages = with pkgs; [
+      intel-media-driver # For Broadwell (2014) or newer processors. LIBVA_DRIVER_NAME=iHD
+    ];
+  };
+  environment.sessionVariables = {LIBVA_DRIVER_NAME = "iHD";}; # Optionally, set the environment variable
+
   services.pipewire = {
     enable = true;
     alsa.enable = true;
