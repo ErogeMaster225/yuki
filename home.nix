@@ -57,8 +57,7 @@ in {
       gnomeExtensions.just-perfection
       gnomeExtensions.vitals
 
-      nnn # terminal file manager
-
+      powertop
       # archives
       zip
       xz
@@ -70,6 +69,8 @@ in {
       localsend
       slack
       hyprpanel
+      teams-for-linux
+      remmina
       swww
       wl-clipboard
       clipse
@@ -117,6 +118,7 @@ in {
       [[ ! -f ~/.config/zsh/.p10k.zsh ]] || source ~/.config/zsh/.p10k.zsh
     '';
   };
+  programs.yazi.enable = true;
 
   programs.hyprlock = {
     enable = true;
@@ -175,6 +177,8 @@ in {
     };
     "kitty/kitty.conf".enable = false;
   };
+
+  xsession.numlock.enable = true;
 
   home.stateVersion = "24.05";
   programs.home-manager.enable = true;
