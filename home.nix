@@ -3,25 +3,13 @@
   config,
   pkgs,
   ...
-}: {
+}: let
+  inherit (config.lib.file) mkOutOfStoreSymlink;
+in {
   # TODO please change the username & home directory to your own
   home.username = "sakurafrost225";
   home.homeDirectory = "/home/sakurafrost225";
 
-  # link the configuration file in current directory to the specified location in home directory
-  # home.file.".config/i3/wallpaper.jpg".source = ./wallpaper.jpg;
-
-  # link all files in `./scripts` to `~/.config/i3/scripts`
-  # home.file.".config/i3/scripts" = {
-  #   source = ./scripts;
-  #   recursive = true;   # link recursively
-  #   executable = true;  # make all files executable
-  # };
-
-  # encode the file content in nix configuration file directly
-  # home.file.".xxx".text = ''
-  #     xxx
-  # '';
   nixpkgs.config = {allowUnfree = true;};
   nixpkgs.overlays = [inputs.neovim-nightly-overlay.overlays.default];
   # set cursor size and dpi for 4k monitor
@@ -29,7 +17,21 @@
     "Xcursor.size" = 16;
     "Xft.dpi" = 172;
   };
-  programs.neovim = {defaultEditor = true;};
+  programs.neovim = {
+    enable = true;
+    defaultEditor = true;
+    package = pkgs.neovim;
+    extraPackages = with pkgs; [
+      lua-language-server
+      emmet-language-server
+      typescript-language-server
+      vue-language-server
+      stylua
+      svelte-language-server
+      prettierd
+      eslint_d
+    ];
+  };
   programs.vscode = {
     enable = true;
     package = inputs.code-insiders.packages.${pkgs.system}.vscode-insider;
@@ -64,12 +66,6 @@
       eza # A modern replacement for ‘ls’
       fzf # A command-line fuzzy finder
 
-      # nix related
-      #
-      # it provides the command `nom` works just like `nix`
-      # with more details log output
-      nix-output-monitor
-
       btop # replacement of htop/nmon
     ]
     ++ [inputs.zen-browser.packages."${system}".default];
@@ -95,9 +91,7 @@
   };
   xdg.configFile = {
     nvim = {
-      source =
-        config.lib.file.mkOutOfStoreSymlink
-        "${config.home.homeDirectory}/dotfiles/.config/nvim";
+      source = mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/.config/nvim";
       recursive = true;
     };
   };
@@ -125,7 +119,5 @@
   # the home Manager release notes for a list of state version
   # changes in each release.
   home.stateVersion = "24.05";
-
-  # Let home Manager install and manage itself.
   programs.home-manager.enable = true;
 }
