@@ -45,6 +45,7 @@ in {
     [
       nerd-fonts.fira-code
       nerd-fonts.jetbrains-mono
+      maple-mono-NF
       gcc
       # here is some command line tools I use frequently
       # feel free to add your own or remove some of them
@@ -70,6 +71,29 @@ in {
     ]
     ++ [inputs.zen-browser.packages."${system}".default];
 
+  programs.zsh = {
+    enable = true;
+    antidote = {
+      enable = true;
+      useFriendlyNames = true;
+      plugins = [
+        "romkatv/powerlevel10k"
+        "marlonrichert/zsh-autocomplete"
+        "zdharma-continuum/fast-syntax-highlighting kind:defer"
+        "babarot/enhancd kind:defer"
+      ];
+    };
+    initExtraFirst = ''
+      if [[ -r "''${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-''${(%):-%n}.zsh" ]]; then
+        source "''${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-''${(%):-%n}.zsh"
+      fi
+    '';
+    autosuggestion.enable = true;
+    dotDir = ".config/zsh";
+    initExtra = ''
+      [[ ! -f ~/.config/zsh/.p10k.zsh ]] || source ~/.config/zsh/.p10k.zsh
+    '';
+  };
   # basic configuration of git, please change to your own
   programs.git = {
     enable = true;
@@ -87,17 +111,6 @@ in {
     ];
   };
 
-  # starship - an customizable prompt for any shell
-  programs.starship = {
-    enable = true;
-    # custom settings
-    settings = {
-      add_newline = false;
-      aws.disabled = true;
-      gcloud.disabled = true;
-      line_break.disabled = true;
-    };
-  };
   xdg.configFile = {
     nvim = {
       source = mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/.config/nvim";

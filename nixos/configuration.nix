@@ -91,6 +91,7 @@
     # no need to redefine it in your config for now)
     #media-session.enable = true;
   };
+  programs.zsh.enable = true;
   programs.nh = {
     enable = true;
     clean.enable = true;
@@ -105,7 +106,7 @@
   users.users.sakurafrost225 = {
     isNormalUser = true;
     description = "SakuraFrost225";
-    extraGroups = ["networkmanager" "wheel"];
+    shell = pkgs.zsh;
     packages = with pkgs; [
       #  thunderbird
     ];
