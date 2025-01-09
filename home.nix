@@ -76,6 +76,15 @@ in {
     userName = "Trong Sang Nguyen";
     userEmail = "33416398+ErogeMaster225@users.noreply.github.com";
     extraConfig = {core = {editor = "nvim";};};
+    includes = [
+      {
+        condition = "gitdir:~/workspace/";
+        contents = {
+          user.name = "Trong Sang Nguyen";
+          user.email = "trongsang_nguyen@datahouse.com";
+        };
+      }
+    ];
   };
 
   # starship - an customizable prompt for any shell
