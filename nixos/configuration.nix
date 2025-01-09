@@ -91,6 +91,12 @@
     # no need to redefine it in your config for now)
     #media-session.enable = true;
   };
+  programs.nh = {
+    enable = true;
+    clean.enable = true;
+    clean.extraArgs = "--keep-since 7d --keep 10";
+    flake = "/home/sakurafrost225/nix-config";
+  };
 
   # Enable touchpad support (enabled default in most desktopManager).
   # services.xserver.libinput.enable = true;
