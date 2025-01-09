@@ -18,6 +18,7 @@
     code-insiders.url = "github:iosmanthus/code-insiders-flake";
     hyprland.url = "github:hyprwm/Hyprland";
     nix-gaming.url = "github:fufexan/nix-gaming";
+    hyprpanel.url = "github:Jas-SinghFSU/HyprPanel";
   };
 
   outputs = {

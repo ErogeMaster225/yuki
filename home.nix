@@ -11,7 +11,7 @@ in {
   home.homeDirectory = "/home/sakurafrost225";
 
   nixpkgs.config = {allowUnfree = true;};
-  nixpkgs.overlays = [inputs.neovim-nightly-overlay.overlays.default];
+  nixpkgs.overlays = [inputs.neovim-nightly-overlay.overlays.default inputs.hyprpanel.overlay];
   # set cursor size and dpi for 4k monitor
   xresources.properties = {
     "Xcursor.size" = 16;
@@ -69,6 +69,7 @@ in {
       vesktop
       localsend
       slack
+      hyprpanel
       swww
       wl-clipboard
       clipse
@@ -124,6 +125,7 @@ in {
       ];
     };
   };
+  services.easyeffects.enable = true;
   # basic configuration of git, please change to your own
   programs.git = {
     enable = true;
