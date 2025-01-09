@@ -24,6 +24,7 @@
   # networking.proxy.default = "http://user:password@proxy:port/";
   # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
   services.resolved.enable = true;
+  nix.nixPath = ["nixpkgs=${inputs.nixpkgs}"];
   nix.settings.experimental-features = "nix-command flakes";
   nix.settings = {
     substituters = [

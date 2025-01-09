@@ -75,6 +75,8 @@ in {
       brightnessctl
       playerctl
       libnotify
+      nixd
+      alejandra
       # utils
       jq
       ripgrep # recursively searches directories for a regex pattern
@@ -86,6 +88,7 @@ in {
     ]
     ++ [inputs.zen-browser.packages."${system}".default];
 
+  services.playerctld.enable = true;
   programs.zsh = {
     enable = true;
     antidote = {
