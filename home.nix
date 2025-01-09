@@ -90,6 +90,10 @@ in {
     ++ [inputs.zen-browser.packages."${system}".default];
 
   services.playerctld.enable = true;
+  programs.direnv = {
+    enable = true;
+    nix-direnv.enable = true;
+  };
   programs.zsh = {
     enable = true;
     antidote = {
@@ -117,6 +121,13 @@ in {
   programs.hyprlock = {
     enable = true;
   };
+  programs.rofi = {
+    enable = true;
+    package = pkgs.rofi-wayland;
+    plugins = with pkgs; [
+      (rofi-calc.override {rofi-unwrapped = rofi-wayland-unwrapped;})
+    ];
+  };
   wayland.windowManager.hyprland = {
     enable = true;
     package = inputs.hyprland.packages.${pkgs.system}.hyprland;
@@ -129,6 +140,7 @@ in {
       ];
     };
   };
+  programs.kitty.enable = true;
   services.easyeffects.enable = true;
   # basic configuration of git, please change to your own
   programs.git = {
@@ -157,6 +169,11 @@ in {
       recursive = true;
     };
     "hypr/hyprland.conf".enable = false;
+    kitty = {
+      source = mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/.config/kitty";
+      recursive = true;
+    };
+    "kitty/kitty.conf".enable = false;
   };
 
   home.stateVersion = "24.05";

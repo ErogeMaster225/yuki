@@ -121,6 +121,8 @@
       #  thunderbird
     ];
   };
+  programs.dconf.enable = true;
+  services.tailscale.enable = true;
   programs.hyprland = {
     enable = true;
     package = inputs.hyprland.packages.${pkgs.system}.default;
