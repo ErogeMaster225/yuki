@@ -31,11 +31,13 @@
 
       # nix community's cache server
       "https://nix-community.cachix.org"
+      "https://hyprland.cachix.org"
       "https://nix-gaming.cachix.org"
     ];
     trusted-public-keys = [
       # nix community's cache server public key
       "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
+      "hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="
       "nix-gaming.cachix.org-1:nbjlureqMbRAxR1gJ/f3hxemL9svXaZF/Ees8vCUUs4="
     ];
   };
@@ -84,12 +86,6 @@
     alsa.support32Bit = true;
     pulse.enable = true;
     lowLatency.enable = true;
-    # If you want to use JACK applications, uncomment this
-    #jack.enable = true;
-
-    # use the example session manager (no others are packaged yet so this is enabled by default,
-    # no need to redefine it in your config for now)
-    #media-session.enable = true;
   };
   programs.zsh.enable = true;
   programs.nh = {
@@ -111,7 +107,21 @@
       #  thunderbird
     ];
   };
-
+  programs.hyprland = {
+    enable = true;
+    package = inputs.hyprland.packages.${pkgs.system}.default;
+    portalPackage = inputs.hyprland.packages.${pkgs.system}.xdg-desktop-portal-hyprland;
+  };
+  xdg.portal = {
+    enable = true;
+    xdgOpenUsePortal = true;
+    config = {
+      common.default = ["gtk"];
+      hyprland.default = ["gtk" "hyprland"];
+    };
+    extraPortals = [pkgs.xdg-desktop-portal-gtk];
+  };
+  environment.variables.NIXOS_OZONE_WL = "1";
   # Install firefox.
   programs.firefox.enable = true;
 

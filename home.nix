@@ -49,6 +49,13 @@ in {
       gcc
       # here is some command line tools I use frequently
       # feel free to add your own or remove some of them
+      gnome-tweaks
+      gnome-shell-extensions
+      gnomeExtensions.appindicator
+      gnomeExtensions.blur-my-shell
+      gnomeExtensions.openweather-refined
+      gnomeExtensions.just-perfection
+      gnomeExtensions.vitals
 
       nnn # terminal file manager
 
@@ -62,12 +69,20 @@ in {
       vesktop
       localsend
       slack
+      swww
+      wl-clipboard
+      clipse
+      brightnessctl
+      playerctl
+      libnotify
       # utils
+      jq
       ripgrep # recursively searches directories for a regex pattern
       eza # A modern replacement for ‘ls’
       fzf # A command-line fuzzy finder
-
       btop # replacement of htop/nmon
+      grimblast
+      satty
     ]
     ++ [inputs.zen-browser.packages."${system}".default];
 
@@ -94,6 +109,18 @@ in {
       [[ ! -f ~/.config/zsh/.p10k.zsh ]] || source ~/.config/zsh/.p10k.zsh
     '';
   };
+  wayland.windowManager.hyprland = {
+    enable = true;
+    package = inputs.hyprland.packages.${pkgs.system}.hyprland;
+    systemd = {
+      enable = false;
+      variables = ["--all"];
+      extraCommands = [
+        "systemctl --user stop graphical-session.target"
+        "systemctl --user start hyprland-session.target"
+      ];
+    };
+  };
   # basic configuration of git, please change to your own
   programs.git = {
     enable = true;
@@ -116,30 +143,13 @@ in {
       source = mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/.config/nvim";
       recursive = true;
     };
-  };
-  # alacritty - a cross-platform, GPU-accelerated terminal emulator
-  programs.alacritty = {
-    enable = true;
-    # custom settings
-    settings = {
-      env.TERM = "xterm-256color";
-      font = {
-        size = 12;
-        draw_bold_text_with_bright_colors = true;
-      };
-      scrolling.multiplier = 5;
-      selection.save_to_clipboard = true;
+    hypr = {
+      source = mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/.config/hypr";
+      recursive = true;
     };
+    "hypr/hyprland.conf".enable = false;
   };
 
-  # This value determines the home Manager release that your
-  # configuration is compatible with. This helps avoid breakage
-  # when a new home Manager release introduces backwards
-  # incompatible changes.
-  #
-  # You can update home Manager without changing this value. See
-  # the home Manager release notes for a list of state version
-  # changes in each release.
   home.stateVersion = "24.05";
   programs.home-manager.enable = true;
 }

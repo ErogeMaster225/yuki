@@ -16,6 +16,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     code-insiders.url = "github:iosmanthus/code-insiders-flake";
+    hyprland.url = "github:hyprwm/Hyprland";
     nix-gaming.url = "github:fufexan/nix-gaming";
   };
 
@@ -26,6 +27,7 @@
     ...
   } @ inputs: let
     system = "x86_64-linux";
+    pkgs = nixpkgs.legacyPackages.${system};
     inherit (self) outputs;
   in {
     formatter.${system} = nixpkgs.legacyPackages.${system}.alejandra;
@@ -39,7 +41,7 @@
       };
     };
     homeConfigurations."sakurafrost225" = home-manager.lib.homeManagerConfiguration {
-      pkgs = nixpkgs.legacyPackages.${system};
+      inherit pkgs;
       modules = [./home.nix];
       extraSpecialArgs = {inherit inputs outputs;};
     };
