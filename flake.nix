@@ -32,6 +32,7 @@
     inherit (self) outputs;
   in {
     formatter.${system} = nixpkgs.legacyPackages.${system}.alejandra;
+    packages.${system} = pkgs.callPackage ./packages {};
     nixosConfigurations = {
       # FIXME replace with your hostname
       nixos = nixpkgs.lib.nixosSystem {

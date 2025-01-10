@@ -88,7 +88,7 @@ in {
       grimblast
       satty
     ]
-    ++ [inputs.zen-browser.packages."${system}".default];
+    ++ [inputs.zen-browser.packages."${system}".default inputs.self.packages."${system}".sourcegit];
 
   services.playerctld.enable = true;
   programs.direnv = {
