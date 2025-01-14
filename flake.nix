@@ -31,7 +31,7 @@
     pkgs = nixpkgs.legacyPackages.${system};
     inherit (self) outputs;
   in {
-    formatter.${system} = nixpkgs.legacyPackages.${system}.alejandra;
+    formatter.${system} = pkgs.alejandra;
     packages.${system} = pkgs.callPackage ./packages {};
     nixosConfigurations = {
       # FIXME replace with your hostname
@@ -39,12 +39,12 @@
         specialArgs = {inherit inputs outputs;};
 
         # > Our main nixos configuration file <
-        modules = [./nixos/configuration.nix];
+        modules = [./system/configuration.nix];
       };
     };
     homeConfigurations."sakurafrost225" = home-manager.lib.homeManagerConfiguration {
       inherit pkgs;
-      modules = [./home.nix];
+      modules = [./home];
       extraSpecialArgs = {inherit inputs outputs;};
     };
   };

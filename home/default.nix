@@ -5,6 +5,7 @@
   ...
 }: let
   inherit (config.lib.file) mkOutOfStoreSymlink;
+  homeDir = config.home.homeDirectory;
 in {
   # TODO please change the username & home directory to your own
   home.username = "sakurafrost225";
@@ -175,16 +176,16 @@ in {
 
   xdg.configFile = {
     nvim = {
-      source = mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/.config/nvim";
+      source = mkOutOfStoreSymlink "${homeDir}/dotfiles/.config/nvim";
       recursive = true;
     };
     hypr = {
-      source = mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/.config/hypr";
+      source = mkOutOfStoreSymlink "${homeDir}/dotfiles/.config/hypr";
       recursive = true;
     };
     "hypr/hyprland.conf".enable = false;
     kitty = {
-      source = mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/.config/kitty";
+      source = mkOutOfStoreSymlink "${homeDir}/dotfiles/.config/kitty";
       recursive = true;
     };
     "kitty/kitty.conf".enable = false;
