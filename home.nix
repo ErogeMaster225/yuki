@@ -40,9 +40,11 @@ in {
     enabled = "fcitx5";
     fcitx5.addons = with pkgs; [fcitx5-unikey fcitx5-mozc fcitx5-gtk];
   };
+  fonts.fontconfig.enable = true;
   # Packages that should be installed to the user profile.
   home.packages = with pkgs;
     [
+      roboto
       nerd-fonts.fira-code
       nerd-fonts.jetbrains-mono
       maple-mono-NF
@@ -64,6 +66,7 @@ in {
       unzip
       p7zip
 
+      overskride
       neovim
       vesktop
       localsend
@@ -87,6 +90,8 @@ in {
       btop # replacement of htop/nmon
       grimblast
       satty
+      moonlight-qt
+      parsec-bin
     ]
     ++ [inputs.zen-browser.packages."${system}".default inputs.self.packages."${system}".sourcegit];
 
@@ -95,6 +100,13 @@ in {
     enable = true;
     nix-direnv.enable = true;
   };
+  programs.fish = {
+    enable = true;
+  };
+  programs.nushell = {
+    enable = true;
+  };
+  programs.oh-my-posh.enable = true;
   programs.zsh = {
     enable = true;
     antidote = {

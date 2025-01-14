@@ -102,6 +102,7 @@
     lowLatency.enable = true;
   };
   programs.zsh.enable = true;
+  programs.fish.enable = true;
   programs.nh = {
     enable = true;
     clean.enable = true;
@@ -116,7 +117,8 @@
   users.users.sakurafrost225 = {
     isNormalUser = true;
     description = "SakuraFrost225";
-    shell = pkgs.zsh;
+    extraGroups = ["networkmanager" "wheel" "seat"];
+    shell = pkgs.fish;
     packages = with pkgs; [
       #  thunderbird
     ];
@@ -137,13 +139,13 @@
     };
     extraPortals = [pkgs.xdg-desktop-portal-gtk];
   };
-  environment.variables.NIXOS_OZONE_WL = "1";
+  environment.sessionVariables.NIXOS_OZONE_WL = "1";
   # Install firefox.
   programs.firefox.enable = true;
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
-
+  services.logind.lidSwitch = "ignore";
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
@@ -169,6 +171,7 @@
   # networking.firewall.allowedUDPPorts = [ ... ];
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;
+  environment.etc.hosts.mode = "0644";
   networking.firewall.checkReversePath = false;
   networking.wireguard.enable = true;
 
